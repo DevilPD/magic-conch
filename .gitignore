@@ -1,6 +1,7 @@
 build
 dist
 *.spec
+순서.txt
 pm.py
 test.py
 m.py

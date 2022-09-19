@@ -3,12 +3,16 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 
 import sys
+import random
 
 def get_path(filename):
     if hasattr(sys, "_MEIPASS"):
         return os.path.join(sys._MEIPASS, filename)
     else:
         return filename
+
+def answer():
+    return
 
 class CustomBar(QWidget):
 
@@ -45,10 +49,15 @@ class MDWindow(QWidget):
 
     def initUI(self):
 
+        self.question_box = QPlainTextEdit()
+        self.question_box.LineWrapMode()
         self.answer_btn = QPushButton("질문하기")
+        self.answer_lbl = QLabel("대답 : ")
 
         self.main_layout = QVBoxLayout()
+        self.main_layout.addWidget(self.question_box)
         self.main_layout.addWidget(self.answer_btn)
+        self.main_layout.addWidget(self.answer_lbl)
 
         self.setLayout(self.main_layout)
 
@@ -81,11 +90,14 @@ class Window(QWidget):
     def open_quest(self):
         self.modal.move(self.pos().x()+255, self.pos().y())
         self.modal.resize(200, self.frameGeometry().height())
-        self.modal.show()
+        if(self.modal.isVisible()):
+            self.modal.hide()
+        else:
+            self.modal.show()
 
     def right_menu(self, pos):
         menu = QMenu()
-        exit_option = menu.addAction('소라고둥님!')
+        exit_option = menu.addAction('소라고동님!')
         exit_option.triggered.connect(self.open_quest)
         menu.exec_(self.mapToGlobal(pos))
 
