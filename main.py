@@ -2,6 +2,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 
+import os
 import sys
 import random
 
@@ -12,7 +13,20 @@ def get_path(filename):
         return filename
 
 def answer():
-    return
+    n = random.randint(1, 51)
+    if n>0 and n<=10:
+        res = "언젠가는"
+    elif n>10 and n<=20:
+        res = "가만히 있어"
+    elif n>20 and n<=30:
+        res = "그것도 안 돼"
+    elif n>30 and n<=40:
+        res = "다시 한 번 물어봐"
+    elif n>40 and n<=50:
+        res = "안 돼"
+    else:
+        res = "그럼"
+    return res
 
 class CustomBar(QWidget):
 
@@ -54,12 +68,18 @@ class MDWindow(QWidget):
         self.answer_btn = QPushButton("질문하기")
         self.answer_lbl = QLabel("대답 : ")
 
+        self.answer_btn.clicked.connect(self.click_btn)
+
         self.main_layout = QVBoxLayout()
         self.main_layout.addWidget(self.question_box)
         self.main_layout.addWidget(self.answer_btn)
         self.main_layout.addWidget(self.answer_lbl)
 
         self.setLayout(self.main_layout)
+
+    def click_btn(self):
+        self.question_box.clear()
+        self.answer_lbl.setText(f"대답 : {answer()}")
 
 class Window(QWidget):
 
