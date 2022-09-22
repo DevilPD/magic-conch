@@ -1,5 +1,6 @@
 build
 dist
+gh
 *.spec
 순서.txt
 pm.py
